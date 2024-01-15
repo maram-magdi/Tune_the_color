@@ -11,11 +11,11 @@ let updateRate = 1/60; //sensor refresh rate?
 function getAccel() {
     DeviceMotionEvent.requestPermission().then(response => {
 
-        log.textContent += response;
+        log.textContent += response + "\n";
 
         if(response == 'granted') {
             // console.log("Accelerometer permission granted!");
-            log.textContent += "Accelerometer permission granted!";
+            log.textContent += "Accelerometer permission granted! \n";
             //do stuff here - not sure what yet
 
             //add a listener to get phone's acceleration 
@@ -32,6 +32,8 @@ function getAccel() {
                     let rotationDegrees = event.alpha;
                     let frontToBackDegrees = event.beta;
                     let leftToRightDegrees = event.gamma;
+
+                    log.textContent += frontToBackDegrees + "\n";
 
                     vx = vx + leftToRightDegrees * updateRate * 2;
                     vy = vy + frontToBackDegrees * updateRate;
