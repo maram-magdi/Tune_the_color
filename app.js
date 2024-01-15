@@ -52,9 +52,10 @@ function getAccel() {
         }
     });
 }
-document.addEventListener('load', () => {
+// document.addEventListener('load', () => {
 
     getPermissionsBttn.addEventListener('click', () => {
+        console.log("clicked!")
         getAccel();
     });
-});
+// });
