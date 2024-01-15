@@ -1,5 +1,6 @@
 let getPermissionsBttn = document.getElementById('get-permissions');
 let ball = document.getElementById('ball');
+let log = document.getElementById('log');
 
 let px = 50; //Position x and y
 let py = 50;
@@ -9,8 +10,12 @@ let updateRate = 1/60; //sensor refresh rate?
 
 function getAccel() {
     DeviceMotionEvent.requestPermission().then(response => {
+
+        log.textContent += response;
+
         if(response == 'granted') {
-            console.log("Accelerometer permission granted!");
+            // console.log("Accelerometer permission granted!");
+            log.textContent += "Accelerometer permission granted!";
             //do stuff here - not sure what yet
 
             //add a listener to get phone's acceleration 
