@@ -14,9 +14,9 @@ function getAccel() {
 
             //add a listener to get phone's acceleration 
                 //in the x,y,z axis (units in m/s2)
-                window.addEventListener('devicemotion', (event) => {
-                    console.log(event);
-                });
+                // window.addEventListener('devicemotion', (event) => {
+                //     console.log(event);
+                // });
             
             // add a listener for phone's orientation 
                 //in the alpha-beta-gamma axes (units in degrees)
