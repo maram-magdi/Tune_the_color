@@ -56,8 +56,8 @@ function getAccel() {
                     // ball.setAttribute('style', "left:" + (px) + "%;" + 
                     //                     "top:" + py + "%;");
 
-                    ball.setAttribute('style', "left:" + (leftToRightDegrees) + "%;" + 
-                                                "top:" + (frontToBackDegrees) + "%;");
+                    ball.setAttribute('style', "left:" + (leftToRightDegrees) + "px;" + 
+                                                "top:" + (frontToBackDegrees) + "px;");
                 });
         }
     });
