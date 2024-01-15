@@ -53,11 +53,11 @@ function getAccel() {
 
                     // dot = document.getElementsByClassName("indicatorDot")[0]
                     // dot.setAttribute('style', "left:" + (px) + "%;" +"top:" + (py) + "%;");
-                    // ball.setAttribute('style', "left:" + (px) + "%;" + 
-                    //                     "top:" + py + "%;");
+                    ball.setAttribute('style', "left:" + (px) + "%;" + 
+                                        "top:" + (py) + "%;");
 
-                    ball.setAttribute('style', "left:" + (leftToRightDegrees) + "px;" + 
-                                                "top:" + (frontToBackDegrees) + "px;");
+                    // ball.setAttribute('style', "left:" + (leftToRightDegrees) + "px;" + 
+                    //                             "top:" + (frontToBackDegrees) + "px;");
                 });
         }
     });
