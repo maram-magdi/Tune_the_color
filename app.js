@@ -1,4 +1,5 @@
 let getPermissionsBttn = document.getElementById('get-permissions');
+let ball = document.getElementById('ball');
 
 let px = 50; //Position x and y
 let py = 50;
