@@ -30,13 +30,13 @@ function getAccel() {
                     console.log(event);
 
                     // let rotationDegrees = event.alpha;
-                    let frontToBackDegrees = event.beta;
+                    // let frontToBackDegrees = event.beta;
                     let leftToRightDegrees = event.gamma;
 
                     vx = vx + leftToRightDegrees * updateRate * 2;
-                    vy = vy + frontToBackDegrees * updateRate;
+                    // vy = vy + frontToBackDegrees * updateRate;
 
-                    log.textContent += vy + "\n";
+                    log.textContent += leftToRightDegrees + "\n";
 
                     //update position and clip it to bounds 
                     px = px + vx * 0.5;
