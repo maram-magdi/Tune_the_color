@@ -1,3 +1,8 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
 body {
     width: 100vw;
     height: 100vh;
@@ -11,8 +16,15 @@ body {
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
+    padding: 5px;
 }
 
-#color3 {
+/* #color3 {
     visibility: hidden;
+} */
+
+div {
+    margin: 5px;
+    width: 33%;
+    aspect-ratio: 1 / 1;
 }
