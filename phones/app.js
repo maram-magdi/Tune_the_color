@@ -8,6 +8,7 @@ let vx = 0;
 let vy = 0;
 let updateRate = 1/60; //sensor refresh rate?
 
+
 function getAccel() {
     DeviceMotionEvent.requestPermission().then(response => {
 
@@ -62,10 +63,28 @@ function getAccel() {
         }
     });
 }
-// document.addEventListener('load', () => {
+window.addEventListener('load', (event) => {
+
+
+    console.log('Page loaded!');
+
+    let socket = io();
+
+    socket.on('connect', () => {
+        console.log("client connected!");
+
+    });
+
+    socket.on('redirect', (newPage) => {
+        window.location.href = newPage;
+    });
+
+
+
 
     getPermissionsBttn.addEventListener('click', () => {
         console.log("clicked!")
         getAccel();
     });
-// });
+
+});
