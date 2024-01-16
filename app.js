@@ -29,14 +29,14 @@ function getAccel() {
                 window.addEventListener('deviceorientation', (event) => {
                     console.log(event);
 
-                    let rotationDegrees = event.alpha;
+                    // let rotationDegrees = event.alpha;
                     let frontToBackDegrees = event.beta;
                     let leftToRightDegrees = event.gamma;
 
-                    log.textContent += frontToBackDegrees + "\n";
-
                     vx = vx + leftToRightDegrees * updateRate * 2;
                     vy = vy + frontToBackDegrees * updateRate;
+
+                    log.textContent += vy + "\n";
 
                     //update position and clip it to bounds 
                     px = px + vx * 0.5;
