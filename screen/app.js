@@ -1,5 +1,9 @@
 // import chroma from "chroma-js";
 
+import JSConfetti from 'js-confetti';
+
+const jsConfetti = new JSConfetti();
+
 let colorsArray = ["red", "orange", "yellow", "green", "blue"];
 // let alphaRandoms = [];
 let alphaRandom;
@@ -11,6 +15,8 @@ let clientsConnected = 0;
 let artwork = document.getElementById('art');
 
 let mappedGyroValue = 0.5;
+
+let playingSwitch = true;
 
 // let colorDiv1 = document.getElementById('color1');
 let colorDiv1 = document.createElement('div');
@@ -61,23 +67,40 @@ window.addEventListener('load', (event) => {
             // socket.emit('alphaRandomsPicked', alphaRandoms);
         }; 
     });
+  
 
     socket.on('GyroValueToScreen', (data) => {
-        // console.log("in screen app.js, gyrovaluetoscreen", data);
-        mappedGyroValue = Math.round(data * 10)/10;    
-        console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
-        let colorRandom = chroma('red').alpha(mappedGyroValue).css();
-        // console.log(colorRandom);
-        colorDiv1.style.backgroundColor = colorRandom;
-    });
-
-    if(mappedGyroValue == alphaRandom){
+      
+        if(playingSwitch == true){
+            // console.log("in screen app.js, gyrovaluetoscreen", data);
+            mappedGyroValue = Math.round(data * 10)/10;    
+            console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
+            let colorRandom = chroma('red').alpha(mappedGyroValue).css();
+            // console.log(colorRandom);
+            colorDiv1.style.backgroundColor = colorRandom;
+        };
+        
+      if(mappedGyroValue == alphaRandom && playingSwitch == true){
+        
+        playingSwitch = false;
+        
         console.log("Winner!");
         let statement = document.createElement('p');
         statement.innerHTML = "Yay! You won!";
         artwork.appendChild(statement);
         colorDiv1.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+        jsConfetti.addConfetti({
+            confettiColors: [
+              '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+            ],
+        });
+        
+      };
+      
+    });
+  
+    
 
-    };
+    
 })
 
