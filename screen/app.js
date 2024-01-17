@@ -9,7 +9,9 @@ let clientsConnected = 0;
 
 let artwork = document.getElementById('art');
 
-let mappedGyroValue;
+let mappedGyroValue = 0.5;
+
+let colorDiv1 = document.getElementById('color1');
 
 window.addEventListener('load', (event) => {
     console.log('Page loaded!');
@@ -21,8 +23,12 @@ window.addEventListener('load', (event) => {
     })
 
     socket.on('GyroValueToScreen', (data) => {
-        console.log("in screen app.js, gyrovaluetoscreen", data);
+        // console.log("in screen app.js, gyrovaluetoscreen", data);
         mappedGyroValue = Math.round(data * 10)/10;    
+        console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
+        let colorRandom = chroma('red').alpha(mappedGyroValue);
+        colorDiv1.setAttribute('style', 'background-color: ' + colorRandom + ';');
+
     });
 
     socket.on('clientsNumber', (data) => {
@@ -31,6 +37,7 @@ window.addEventListener('load', (event) => {
 
         if(clientsConnected > 0) {
             artwork.innerHTML = '';
+            alphaRandoms = [];
             for(let i = 0; i < clientsConnected; i++){
                 
                 let colorDiv = document.createElement('div');
@@ -42,13 +49,13 @@ window.addEventListener('load', (event) => {
                 console.log(alphaRandoms[i]);
                 // socket.emit('alphaRandomPicked', alphaRandom);
                 // let colorRandom = chroma(colorsArray[randomNum]).alpha(alphaRandoms[i]);
-                let colorRandom = chroma(colorsArray[randomNum]).alpha(mappedGyroValue);
+                // let colorRandom = chroma(colorsArray[randomNum]).alpha(mappedGyroValue);
 
-                if(mappedGyroValue == alphaRandoms[i]){
-                    console.log('WON!');
-                };
+                // if(mappedGyroValue == alphaRandoms[i]){
+                //     console.log('WON!');
+                // };
 
-                colorDiv.setAttribute('style', 'background-color: ' + colorRandom + ';');
+                // colorDiv.setAttribute('style', 'background-color: ' + colorRandom + ';');
             };
             // socket.emit('alphaRandomsPicked', alphaRandoms);
         }; 
