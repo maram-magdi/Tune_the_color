@@ -9,6 +9,8 @@ let clientsConnected = 0;
 
 let artwork = document.getElementById('art');
 
+let mappedGyroValue;
+
 window.addEventListener('load', (event) => {
     console.log('Page loaded!');
 
@@ -17,6 +19,11 @@ window.addEventListener('load', (event) => {
     socket.on('connect', () => {
         console.log("client connected!")
     })
+
+    socket.on('GyroValueToScreen', (data) => {
+        console.log("in screen app.js, gyrovaluetoscreen", data);
+        mappedGyroValue = Math.round(data * 10)/10;    
+    });
 
     socket.on('clientsNumber', (data) => {
         clientsConnected = data-1;
@@ -31,10 +38,16 @@ window.addEventListener('load', (event) => {
                 colorDiv.setAttribute('id', 'color' + (i+1));
 
                 let randomNum = Math.floor(Math.random() * colorsArray.length);
-                alphaRandoms[i] = Math.random();
+                alphaRandoms[i] = Math.round(Math.random() * 10) / 10;
                 console.log(alphaRandoms[i]);
                 // socket.emit('alphaRandomPicked', alphaRandom);
-                let colorRandom = chroma(colorsArray[randomNum]).alpha(alphaRandoms[i]);
+                // let colorRandom = chroma(colorsArray[randomNum]).alpha(alphaRandoms[i]);
+                let colorRandom = chroma(colorsArray[randomNum]).alpha(mappedGyroValue);
+
+                if(mappedGyroValue == alphaRandoms[i]){
+                    console.log('WON!');
+                };
+
                 colorDiv.setAttribute('style', 'background-color: ' + colorRandom + ';');
             };
             // socket.emit('alphaRandomsPicked', alphaRandoms);

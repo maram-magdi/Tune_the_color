@@ -59,6 +59,7 @@ function getAccel() {
                     mapValue = mapValueToRange(leftToRightDegrees);
                     
                     log.textContent += mapValue + "\n";
+                    console.log("in phones/app.js, about to emit gyro mapped val", mapValue);
                     socket.emit('mappedGyroValue', mapValue);
 
                     vx = vx + leftToRightDegrees * updateRate * 2;
