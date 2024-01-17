@@ -72,6 +72,11 @@ window.addEventListener('load', (event) => {
 
         if(mappedGyroValue == alphaRandom){
             console.log("Winner!");
+            let statement = document.createElement('p');
+            statement.innerHTML = "Yay! You won!";
+            artwork.appendChild(statement);
+            colorDiv1.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+
         }
 
     });
