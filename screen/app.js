@@ -1,6 +1,6 @@
 // import chroma from "chroma-js";
 
-import JSConfetti from 'js-confetti';
+// import JSConfetti from 'js-confetti';
 
 const jsConfetti = new JSConfetti();
 
