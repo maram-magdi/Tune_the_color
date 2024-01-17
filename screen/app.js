@@ -69,16 +69,15 @@ window.addEventListener('load', (event) => {
         let colorRandom = chroma('red').alpha(mappedGyroValue).css();
         // console.log(colorRandom);
         colorDiv1.style.backgroundColor = colorRandom;
-
-        if(mappedGyroValue == alphaRandom){
-            console.log("Winner!");
-            let statement = document.createElement('p');
-            statement.innerHTML = "Yay! You won!";
-            artwork.appendChild(statement);
-            colorDiv1.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
-
-        }
-
     });
+
+    if(mappedGyroValue == alphaRandom){
+        console.log("Winner!");
+        let statement = document.createElement('p');
+        statement.innerHTML = "Yay! You won!";
+        artwork.appendChild(statement);
+        colorDiv1.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+
+    };
 })
 
