@@ -25,18 +25,6 @@ let degreeDiff;
 // let colorDiv1 = document.getElementById('color1');
 let colorDiv1 = document.createElement('div');
 
-// Create an audio context
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-// Load your audio file
-const audioElement = new Audio('/media/audio.mp3');
-const audioSource = audioContext.createMediaElementSource(audioElement);
-
-// Create gain node for volume control
-const gainNode = audioContext.createGain();
-audioSource.connect(gainNode);
-gainNode.connect(audioContext.destination);
-
 // Linear mapping function for volume adjustment
 const mapVolume = (inputValue) => {
     // // Ensure the input value is within the valid range [0, 1]
@@ -60,6 +48,18 @@ window.addEventListener('load', (event) => {
 
     clickAudio.addEventListener('click', () => {
         console.log('clicked!');
+
+        // Create an audio context
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+        // Load your audio file
+        const audioElement = new Audio('/media/audio.mp3');
+        const audioSource = audioContext.createMediaElementSource(audioElement);
+
+        // Create gain node for volume control
+        const gainNode = audioContext.createGain();
+        audioSource.connect(gainNode);
+        gainNode.connect(audioContext.destination);
     });
 
     let socket = io();
