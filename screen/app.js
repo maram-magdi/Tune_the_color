@@ -18,9 +18,40 @@ let mappedGyroValue = 0.5;
 
 let playingSwitch = true;
 
+let degreeDiff;
+
 // let colorDiv1 = document.getElementById('color1');
 let colorDiv1 = document.createElement('div');
 
+// Create an audio context
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+// Load your audio file
+const audioElement = new Audio('/media/audio.mp3');
+const audioSource = audioContext.createMediaElementSource(audioElement);
+
+// Create gain node for volume control
+const gainNode = audioContext.createGain();
+audioSource.connect(gainNode);
+gainNode.connect(audioContext.destination);
+
+// Linear mapping function for volume adjustment
+const mapVolume = (inputValue) => {
+    // // Ensure the input value is within the valid range [0, 1]
+    // inputValue = Math.min(1, Math.max(0, inputValue));
+    
+    // Map the input value to the desired volume range [0.1, 1]
+    const minVolume = 0.1;
+    const maxVolume = 1;
+    const mappedVolume = minVolume + inputValue * (maxVolume - minVolume);
+  
+    return mappedVolume;
+};
+  
+// Adjust volume based on your mapped values
+const adjustVolume = (mappedValue) => {
+    gainNode.gain.value = mappedValue;
+};
 
 window.addEventListener('load', (event) => {
     console.log('Page loaded!');
@@ -78,6 +109,15 @@ window.addEventListener('load', (event) => {
             let colorRandom = chroma('red').alpha(mappedGyroValue).css();
             // console.log(colorRandom);
             colorDiv1.style.backgroundColor = colorRandom;
+
+            degreeDiff = Math.abs(alphaRandom - mappedGyroValue);
+
+            // Start the audio playback
+            audioElement.play();
+
+            // Call the adjustVolume function with your mapped values
+            // const mappedVolumeValue = 0.5; // Replace with your desired mapped value
+            adjustVolume(mapVolume(degreeDiff));
         };
         
       if(mappedGyroValue == alphaRandom && playingSwitch == true){
