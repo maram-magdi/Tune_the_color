@@ -55,7 +55,8 @@ io.on('connection', (socket) => {
     // });
 
     socket.on('mappedGyroValue', (data) => {
-        console.log(data);
+        console.log("Map value is " + data);
+        io.emit('GyroValueToScreen', data);
     });
 
     socket.on('disconnect', () => {

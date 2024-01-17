@@ -1,3 +1,5 @@
+let socket = io();
+
 let getPermissionsBttn = document.getElementById('get-permissions');
 let ball = document.getElementById('ball');
 let log = document.getElementById('log');
@@ -57,6 +59,7 @@ function getAccel() {
                     mapValue = mapValueToRange(leftToRightDegrees);
                     
                     log.textContent += mapValue + "\n";
+                    socket.emit('mappedGyroValue', mapValue);
 
                     vx = vx + leftToRightDegrees * updateRate * 2;
                     // vy = vy + frontToBackDegrees * updateRate;
@@ -90,7 +93,6 @@ window.addEventListener('load', (event) => {
 
     console.log('Page loaded!');
 
-    let socket = io();
 
     socket.on('connect', () => {
         console.log("client connected!");
@@ -107,7 +109,7 @@ window.addEventListener('load', (event) => {
     getPermissionsBttn.addEventListener('click', () => {
         console.log("clicked!")
         getAccel();
-        socket.emit('mappedGyroValue', mapValue);
+        // console.log(mapValue);
     });
 
 });
