@@ -18,6 +18,8 @@ let mappedGyroValue = 0.5;
 
 let playingSwitch = true;
 
+let clickAudio = document.getElementById('clickAudio');
+
 let degreeDiff;
 
 // let colorDiv1 = document.getElementById('color1');
@@ -55,6 +57,10 @@ const adjustVolume = (mappedValue) => {
 
 window.addEventListener('load', (event) => {
     console.log('Page loaded!');
+
+    clickAudio.addEventListener('click', () => {
+        console.log('clicked!');
+    });
 
     let socket = io();
 
