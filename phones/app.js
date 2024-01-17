@@ -8,6 +8,20 @@ let vx = 0;
 let vy = 0;
 let updateRate = 1/60; //sensor refresh rate?
 
+let mapValue;
+
+function mapValueToRange(value, min = -90, max = 90) {
+    // // Ensure the value is within the original range
+    // const clampedValue = Math.min(Math.max(value, originalMin), originalMax);
+
+    // Calculate the percentage of the value within the original range
+    const percentage = (value - min) / (max - min);
+
+    // Map the percentage to the 0 to 1 range
+    const mappedValue = percentage;
+
+    return mappedValue;
+};
 
 function getAccel() {
     DeviceMotionEvent.requestPermission().then(response => {
@@ -30,11 +44,19 @@ function getAccel() {
                 window.addEventListener('deviceorientation', (event) => {
                     console.log(event);
 
+                    //left to rigth degrees from -90 to 90 
+                    // math.round it 
+                    // map those numbers from 0 to 1
+                    // randomly choose a number from 0 to 1
+                    //if random0to1 == mapped-90to90 then color becomes hidden or delete to show photo behind, 
+
+
                     // let rotationDegrees = event.alpha;
                     // let frontToBackDegrees = event.beta;
-                    let leftToRightDegrees = event.gamma;
-
-                    log.textContent += leftToRightDegrees + "\n";
+                    let leftToRightDegrees = Math.round(event.gamma);
+                    mapValue = mapValueToRange(leftToRightDegrees);
+                    
+                    log.textContent += mapValue + "\n";
 
                     vx = vx + leftToRightDegrees * updateRate * 2;
                     // vy = vy + frontToBackDegrees * updateRate;
@@ -85,6 +107,7 @@ window.addEventListener('load', (event) => {
     getPermissionsBttn.addEventListener('click', () => {
         console.log("clicked!")
         getAccel();
+        socket.emit('mappedGyroValue', mapValue);
     });
 
 });

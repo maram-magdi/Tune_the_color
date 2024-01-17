@@ -19,6 +19,8 @@ io = new io.Server(server);
 let waitlist = '/waitlist/index.html';
 let clientsCounter = 0;
 
+// let alphaRandoms = [];
+
 io.on('connection', (socket) => {
     console.log('Client connected: ' + socket.id);
     clientsCounter++;
@@ -47,6 +49,14 @@ io.on('connection', (socket) => {
 
 
     // might need to automatically sign out people after a certain time
+
+    // socket.on('alphaRandomsPicked', (data) => {
+    //     alphaRandoms = data;
+    // });
+
+    socket.on('mappedGyroValue', (data) => {
+        console.log(data);
+    });
 
     socket.on('disconnect', () => {
         console.log('Client ' + socket.id + " left");

@@ -1,4 +1,7 @@
+// import chroma from "chroma-js";
+
 let colorsArray = ["red", "orange", "yellow", "green", "blue"];
+let alphaRandoms = [];
 
 let signalStrength = 0;
 
@@ -22,13 +25,19 @@ window.addEventListener('load', (event) => {
         if(clientsConnected > 0) {
             artwork.innerHTML = '';
             for(let i = 0; i < clientsConnected; i++){
-
-                let randomNum = Math.floor(Math.random() * colorsArray.length);
+                
                 let colorDiv = document.createElement('div');
                 artwork.appendChild(colorDiv);
                 colorDiv.setAttribute('id', 'color' + (i+1));
-                colorDiv.setAttribute('style', 'background-color: ' + colorsArray[randomNum] + ';');
+
+                let randomNum = Math.floor(Math.random() * colorsArray.length);
+                alphaRandoms[i] = Math.random();
+                console.log(alphaRandoms[i]);
+                // socket.emit('alphaRandomPicked', alphaRandom);
+                let colorRandom = chroma(colorsArray[randomNum]).alpha(alphaRandoms[i]);
+                colorDiv.setAttribute('style', 'background-color: ' + colorRandom + ';');
             };
+            // socket.emit('alphaRandomsPicked', alphaRandoms);
         }; 
     });
 

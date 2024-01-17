@@ -6,6 +6,11 @@
 body {
     width: 100vw;
     height: 100vh;
+    background-color: rgb(35, 35, 35);
+}
+
+h1 {
+    color: white;
 }
 
 #art {
