@@ -47,7 +47,7 @@ let colorsArray = ["ff0800", "orange", "dcb625", "green", "e1c38f", "blue", "hot
 let alphaRandom;
 let museumRandom;
 
-let countdown = 10;
+let countdown = 20;
 let timerInterval;
 
 let titleSect = document.getElementById('title');
@@ -214,35 +214,39 @@ window.addEventListener('load', (event) => {
 
 function winAfter5 () {
     // console.log(`Countdown: ${countdown} seconds`);
-            
-    if (countdown === 0) {
-        // console.log("Timer is complete!");
-        // Perform any actions you need when the timer is complete
 
-        playingSwitch = false;
-
-
-        if (playingSwitch == false){
-                
-            clearInterval(timerInterval);
-            console.log("Winner!");
-            let statement = document.createElement('p');
-            statement.innerHTML = "Yay! You won!";
-            museumSect.appendChild(statement);
-            pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
-            jsConfetti.addConfetti({
-                confettiColors: [
-                '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-                ],
-            });
-            audioElement.pause();
-            audioElement2.play();
-
+    if(titleMapGyroValue == museumRandom){
+        
+        if (countdown === 0) {
+            // console.log("Timer is complete!");
+            // Perform any actions you need when the timer is complete
     
-        };
-    }
+            playingSwitch = false;
+    
+    
+            if (playingSwitch == false){
+                    
+                clearInterval(timerInterval);
+                console.log("Winner!");
+                let statement = document.createElement('p');
+                statement.innerHTML = "Yay! You won!";
+                museumSect.appendChild(statement);
+                pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+                jsConfetti.addConfetti({
+                    confettiColors: [
+                    '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+                    ],
+                });
+                audioElement.pause();
+                audioElement2.play();
+    
+        
+            };
+        }
+                
+        countdown--;
+    };
             
-    countdown--;
 };
 
 function mapValueToRange(value, min = 0, max = 6) {
