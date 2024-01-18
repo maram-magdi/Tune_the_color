@@ -6,37 +6,44 @@ let museum = [
     {
         title: "Girl with Balloon",
         artwork: "media/banksy.png",
-        color: "ff0800"
+        color: "ff0800",
+        won: false
     },
     {
         title: "Girl with a Pearl Earring",
         artwork: "media/girlpearl.png",
-        color: "dcb625"
+        color: "dcb625",
+        won: false
     },
     {
         title: "The Great Wave off Kanagawa",
         artwork: "media/greatwave.png",
-        color: "e1c38f"
+        color: "e1c38f",
+        won: false
     },
     {
         title: "Composition with Large Red Plane, Yellow, Black, Gray, and Blue",
         artwork: "media/piet.png",
-        color: "ff0800"
+        color: "ff0800",
+        won: false
     },
     {
         title: "The Scream",
         artwork: "media/screamingman.png",
-        color: "3a5197"
+        color: "3a5197",
+        won: false
     },
     {
         title: "The Starry Night",
         artwork: "media/starrynight.png",
-        color: "345bde"
+        color: "345bde",
+        won: false
     },
     {
         title: "Sunflowers (Munich version)",
         artwork: "media/sunflowers.png",
-        color: "8bedd6"
+        color: "8bedd6",
+        won: false
     }
 ];
 
@@ -47,7 +54,6 @@ let colorsArray = ["ff0800", "orange", "dcb625", "green", "e1c38f", "blue", "hot
 let alphaRandom;
 let museumRandom;
 
-let countdown = 20;
 let timerInterval;
 
 let titleSect = document.getElementById('title');
@@ -73,46 +79,49 @@ let degreeDiff;
 // let colorDiv1 = document.getElementById('color1');
 let colorDiv1 = document.createElement('div');
 
+let statement = document.createElement('p');
+
 let audioContext, audioElement, audioSource, gainNode;
 
 
 // Linear mapping function for volume adjustment
-const mapVolume = (inputValue) => {
-    // // Ensure the input value is within the valid range [0, 1]
-    // inputValue = Math.min(1, Math.max(0, inputValue));
+// const mapVolume = (inputValue) => {
+//     // // Ensure the input value is within the valid range [0, 1]
+//     // inputValue = Math.min(1, Math.max(0, inputValue));
     
-    // Map the input value to the desired volume range [0.1, 1]
-    const minVolume = 0.1;
-    const maxVolume = 1;
-    const mappedVolume = 1 - (minVolume + inputValue * (maxVolume - minVolume));
+//     // Map the input value to the desired volume range [0.1, 1]
+//     const minVolume = 0.1;
+//     const maxVolume = 1;
+//     const mappedVolume = 1 - (minVolume + inputValue * (maxVolume - minVolume));
   
-    return mappedVolume;
-};
+//     return mappedVolume;
+// };
   
-// Adjust volume based on your mapped values
-const adjustVolume = (mappedValue) => {
-    gainNode.gain.value = mappedValue;
-};
+// // Adjust volume based on your mapped values
+// const adjustVolume = (mappedValue) => {
+//     console.log("mappedValue", mappedValue)
+//     gainNode.gain.value = mappedValue;
+// };
 
 clickAudio.addEventListener('click', () => {
     console.log('clicked!');
 
     // Create an audio context
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    // audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
     // Load your audio file
-    audioElement = new Audio('/media/audio2.mp3');
-    audioElement2 = new Audio('/media/correctAudio.mp3');
-    audioSource = audioContext.createMediaElementSource(audioElement);
+    // audioElement = new Audio('/media/audio2.mp3');
+//     audioElement2 = new Audio('/media/correctAudio.mp3');
+//     audioSource = audioContext.createMediaElementSource(audioElement);
 
-    // Create gain node for volume control
-    gainNode = audioContext.createGain();
-    audioSource.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+//     // Create gain node for volume control
+//     gainNode = audioContext.createGain();
+//     audioSource.connect(gainNode);
+//     gainNode.connect(audioContext.destination);
 });
 
 window.addEventListener('load', (event) => {
-    console.log('Page loaded!');
+    console.log('Page loaded!!!');
 
     let socket = io();
 
@@ -132,6 +141,14 @@ window.addEventListener('load', (event) => {
             // colorDiv1.setAttribute('id', 'color1');
             alphaRandom = Math.round(Math.random() * 10) / 10;
             console.log(alphaRandom);
+  
+            clearInterval(timerInterval)
+            timerInterval = null;
+            playingSwitch = true;
+            for (var i; i<museum.length; i++) {
+              museum[i].won = false
+            }
+            statement.innerHTML = "";
 
             museumRandom = Math.floor(Math.random() * museum.length);
             // console.log("museum random is " + museumRandom);
@@ -166,14 +183,14 @@ window.addEventListener('load', (event) => {
 
     socket.on('GyroValueToScreen', (data) => {
       
-        if(playingSwitch == true){
+        if(playingSwitch){
             // console.log("in screen app.js, gyrovaluetoscreen", data);
 
             // let correctTitle = mapValueToRange(museumRandom);
             // console.log("correct title number is " + correctTitle);
 
             mappedGyroValue = Math.round(data * 10)/10;    
-            console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
+            // console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
             let colorRandom = chroma('red').alpha(mappedGyroValue).css();
             // console.log(colorRandom);
             pixelImg.style.backgroundColor = colorRandom;
@@ -182,16 +199,16 @@ window.addEventListener('load', (event) => {
             // console.log(degreeDiff);
 
             // Start the audio playback
-            audioElement.play();
+            //audioElement.play();
 
             // Call the adjustVolume function with your mapped values
             // const mappedVolumeValue = 0.5; // Replace with your desired mapped value
-            adjustVolume(mapVolume(degreeDiff));
+            //adjustVolume(mapVolume(degreeDiff));
 
 
             //FIGURING OUT THE TITLE 
             titleMapGyroValue = Math.floor(mapValueTitle(mappedGyroValue));
-            console.log(titleMapGyroValue);
+            console.log("titleMapGyroValue", titleMapGyroValue);
 
             titleName.innerHTML = museum[titleMapGyroValue].title;
             titleSect.appendChild(titleName);
@@ -201,57 +218,48 @@ window.addEventListener('load', (event) => {
 
         //     timerInterval = setInterval(winAfter5, 1000);
         // };
-
-        if(titleMapGyroValue == museumRandom && playingSwitch == true){
-
-            timerInterval = setInterval(winAfter5, 1000);
+        if(titleMapGyroValue == museumRandom){
+          startTimer()
         } else {
-            countdown = 20;
+          stopTimer()
         };
       
     });
     
 })
 
+function startTimer() {
+  let count = 5;
+  timerInterval = setInterval(function(){
+    count--;
+    if (count < 0) {
+      stopTimer()
+      winAfter5()
+    }
+  }, 1000);
+}
+
+  
+function stopTimer() {
+  clearInterval(timerInterval)
+}
+
 
 function winAfter5 () {
-    // console.log(`Countdown: ${countdown} seconds`);
-
-    if(titleMapGyroValue == museumRandom){
-
-        countdown--;
-
-        if (countdown === 0) {
-            // console.log("Timer is complete!");
-            // Perform any actions you need when the timer is complete
-    
-            playingSwitch = false;
-    
-    
-            if (playingSwitch == false){
-                    
-                clearInterval(timerInterval);
-                console.log("Winner!");
-                let statement = document.createElement('p');
-                statement.innerHTML = "Yay! You won!";
-                museumSect.appendChild(statement);
-                pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
-                jsConfetti.addConfetti({
-                    confettiColors: [
-                    '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-                    ],
-                });
-                audioElement.pause();
-                audioElement2.play();
-    
-        
-            };
-        }
-                
-    } else {
-        countdown = 20;
-    };
-            
+  if(!museum[museumRandom].won) {
+    museum[museumRandom].won = true;
+    playingSwitch = false
+    statement.innerHTML = "Yay! You won!";
+    museumSect.appendChild(statement);
+    pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+    jsConfetti.addConfetti({
+      confettiColors: [
+        '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+      ],
+    });
+    //audioElement.pause();
+    //audioElement2.play();
+  }
 };
 
 function mapValueToRange(value, min = 0, max = 6) {
