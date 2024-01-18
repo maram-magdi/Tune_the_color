@@ -38,9 +38,10 @@ div {
 
 #title {
     background-color: antiquewhite;
-    width: 30%;
+    width: 25%;
     height: auto;
-    aspect-ratio: 2/3;
+    aspect-ratio: 3/2;
+    padding-left: 20%;
 }
 
 #museum {
