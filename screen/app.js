@@ -179,21 +179,6 @@ window.addEventListener('load', (event) => {
             
         
         };
-
-        if (playingSwitch == false){
-                
-            console.log("Winner!");
-            let statement = document.createElement('p');
-            statement.innerHTML = "Yay! You won!";
-            museumSect.appendChild(statement);
-            pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
-            jsConfetti.addConfetti({
-                confettiColors: [
-                '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-                ],
-            });
-    
-        };
       
     });
     
@@ -209,6 +194,22 @@ function winAfter5 () {
         // Perform any actions you need when the timer is complete
 
         playingSwitch = false;
+
+
+        if (playingSwitch == false){
+                
+            console.log("Winner!");
+            let statement = document.createElement('p');
+            statement.innerHTML = "Yay! You won!";
+            museumSect.appendChild(statement);
+            pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+            jsConfetti.addConfetti({
+                confettiColors: [
+                '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+                ],
+            });
+    
+        };
     }
             
     countdown--;
