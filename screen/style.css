@@ -36,6 +36,13 @@ div {
     aspect-ratio: 1 / 1;
 }
 
+#title {
+    background-color: antiquewhite;
+    width: 30%;
+    height: auto;
+    aspect-ratio: 2/3;
+}
+
 #museum {
     /* position: absolute; */
     /* aspect-ratio: 1 / 1; */

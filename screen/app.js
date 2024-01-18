@@ -4,30 +4,37 @@
 
 let museum = [
     {
+        title: "Girl with Balloon",
         artwork: "media/banksy.png",
         color: "ff0800"
     },
     {
+        title: "Girl with a Pearl Earring",
         artwork: "media/girlpearl.png",
         color: "dcb625"
     },
     {
+        title: "The Great Wave off Kanagawa",
         artwork: "media/greatwave.png",
         color: "e1c38f"
     },
     {
+        title: "Composition with Large Red Plane, Yellow, Black, Gray, and Blue",
         artwork: "media/piet.png",
         color: "ff0800"
     },
     {
+        title: "The Scream",
         artwork: "media/screamingman.png",
         color: "3a5197"
     },
     {
+        title: "The Starry Night",
         artwork: "media/starrynight.png",
         color: "345bde"
     },
     {
+        title: "Sunflowers (Munich version)",
         artwork: "media/sunflowers.png",
         color: "8bedd6"
     }
@@ -156,6 +163,10 @@ window.addEventListener('load', (event) => {
       
         if(playingSwitch == true){
             // console.log("in screen app.js, gyrovaluetoscreen", data);
+
+            let correctTitle = mapValueToRange(museumRandom);
+            console.log("correct title number is " + correctTitle);
+            
             mappedGyroValue = Math.round(data * 10)/10;    
             console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
             let colorRandom = chroma('red').alpha(mappedGyroValue).css();
@@ -212,5 +223,17 @@ function winAfter5 () {
     }
             
     countdown--;
-}
+};
 
+function mapValueToRange(value, min = 0, max = 6) {
+    // // Ensure the value is within the original range
+    // const clampedValue = Math.min(Math.max(value, originalMin), originalMax);
+
+    // Calculate the percentage of the value within the original range
+    const percentage = (value - min) / (max - min);
+
+    // Map the percentage to the 0 to 1 range
+    const mappedValue = percentage;
+
+    return mappedValue;
+};
