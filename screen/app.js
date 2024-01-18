@@ -50,6 +50,10 @@ let museumRandom;
 let countdown = 10;
 let timerInterval;
 
+let titleSect = document.getElementById('title');
+let titleName = document.createElement('p');
+let titleMapGyroValue;
+
 let signalStrength = 0;
 
 let clientsConnected = 0;
@@ -164,9 +168,9 @@ window.addEventListener('load', (event) => {
         if(playingSwitch == true){
             // console.log("in screen app.js, gyrovaluetoscreen", data);
 
-            let correctTitle = mapValueToRange(museumRandom);
-            console.log("correct title number is " + correctTitle);
-            
+            // let correctTitle = mapValueToRange(museumRandom);
+            // console.log("correct title number is " + correctTitle);
+
             mappedGyroValue = Math.round(data * 10)/10;    
             console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
             let colorRandom = chroma('red').alpha(mappedGyroValue).css();
@@ -182,6 +186,14 @@ window.addEventListener('load', (event) => {
             // Call the adjustVolume function with your mapped values
             // const mappedVolumeValue = 0.5; // Replace with your desired mapped value
             adjustVolume(mapVolume(degreeDiff));
+
+
+            //FIGURING OUT THE TITLE 
+            titleMapGyroValue = Math.floor(mapValueTitle(mappedGyroValue));
+            console.log(titleMapGyroValue);
+
+            title.innerHTML = musuem[titleMapGyroValue].title;
+            titleSect.appendChild(title);
         };
         
         if(mappedGyroValue == alphaRandom && playingSwitch == true){
@@ -237,3 +249,11 @@ function mapValueToRange(value, min = 0, max = 6) {
 
     return mappedValue;
 };
+
+function mapValueTitle(value, inMin = 0, inMax = 1, outMin = 0, outMax = 6) {
+    // Ensure the input value is within the specified range
+    // value = Math.min(Math.max(value, inMin), inMax);
+    
+    // Perform linear interpolation
+    return (value - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
