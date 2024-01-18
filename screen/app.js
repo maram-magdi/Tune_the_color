@@ -41,6 +41,7 @@ let alphaRandom;
 let museumRandom;
 
 let countdown = 5;
+let timerInterval;
 
 let signalStrength = 0;
 
@@ -174,7 +175,7 @@ window.addEventListener('load', (event) => {
         
         if(mappedGyroValue == alphaRandom && playingSwitch == true){
 
-            const timerInterval = setInterval(winAfter5, 1000);
+            timerInterval = setInterval(winAfter5, 1000);
 
             
         
