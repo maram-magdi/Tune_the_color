@@ -36,7 +36,7 @@ const mapVolume = (inputValue) => {
     // Map the input value to the desired volume range [0.1, 1]
     const minVolume = 0.1;
     const maxVolume = 1;
-    const mappedVolume = minVolume + inputValue * (maxVolume - minVolume);
+    const mappedVolume = 1 - (minVolume + inputValue * (maxVolume - minVolume));
   
     return mappedVolume;
 };
@@ -120,6 +120,7 @@ window.addEventListener('load', (event) => {
             colorDiv1.style.backgroundColor = colorRandom;
 
             degreeDiff = Math.abs(alphaRandom - mappedGyroValue);
+            // console.log(degreeDiff);
 
             // Start the audio playback
             audioElement.play();
