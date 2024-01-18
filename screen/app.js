@@ -216,7 +216,9 @@ function winAfter5 () {
     // console.log(`Countdown: ${countdown} seconds`);
 
     if(titleMapGyroValue == museumRandom){
-        
+
+        countdown--;
+
         if (countdown === 0) {
             // console.log("Timer is complete!");
             // Perform any actions you need when the timer is complete
@@ -244,7 +246,8 @@ function winAfter5 () {
             };
         }
                 
-        countdown--;
+    } else {
+        countdown = 20;
     };
             
 };
