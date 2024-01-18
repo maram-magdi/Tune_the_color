@@ -174,7 +174,7 @@ window.addEventListener('load', (event) => {
         
         if(mappedGyroValue == alphaRandom && playingSwitch == true){
 
-            setInterval(winAfter5, 1000);
+            const timerInterval = setInterval(winAfter5, 1000);
         
         };
       
