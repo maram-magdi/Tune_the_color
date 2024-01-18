@@ -102,6 +102,7 @@ clickAudio.addEventListener('click', () => {
 
     // Load your audio file
     audioElement = new Audio('/media/audio2.mp3');
+    audioElement2 = new Audio('/media/correctAudio.mp3');
     audioSource = audioContext.createMediaElementSource(audioElement);
 
     // Create gain node for volume control
@@ -234,6 +235,9 @@ function winAfter5 () {
                 '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
                 ],
             });
+            audioElement.pause();
+            audioElement2.play();
+
     
         };
     }
