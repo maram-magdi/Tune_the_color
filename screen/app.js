@@ -215,8 +215,7 @@ window.addEventListener('load', (event) => {
 function winAfter5 () {
     // console.log(`Countdown: ${countdown} seconds`);
             
-    if (countdown === 0 && titleMapGyroValue == museumRandom) {
-        clearInterval(timerInterval);
+    if (countdown === 0) {
         // console.log("Timer is complete!");
         // Perform any actions you need when the timer is complete
 
@@ -225,6 +224,7 @@ function winAfter5 () {
 
         if (playingSwitch == false){
                 
+            clearInterval(timerInterval);
             console.log("Winner!");
             let statement = document.createElement('p');
             statement.innerHTML = "Yay! You won!";
