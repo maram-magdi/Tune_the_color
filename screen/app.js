@@ -205,6 +205,8 @@ window.addEventListener('load', (event) => {
         if(titleMapGyroValue == museumRandom && playingSwitch == true){
 
             timerInterval = setInterval(winAfter5, 1000);
+        } else {
+            counter = 20;
         };
       
     });
