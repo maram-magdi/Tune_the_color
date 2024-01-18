@@ -40,7 +40,7 @@ let colorsArray = ["ff0800", "orange", "dcb625", "green", "e1c38f", "blue", "hot
 let alphaRandom;
 let museumRandom;
 
-let countdown = 5;
+let countdown = 10;
 let timerInterval;
 
 let signalStrength = 0;
@@ -176,8 +176,6 @@ window.addEventListener('load', (event) => {
         if(mappedGyroValue == alphaRandom && playingSwitch == true){
 
             timerInterval = setInterval(winAfter5, 1000);
-
-            
         
         };
       
@@ -187,11 +185,11 @@ window.addEventListener('load', (event) => {
 
 
 function winAfter5 () {
-    console.log(`Countdown: ${countdown} seconds`);
+    // console.log(`Countdown: ${countdown} seconds`);
             
     if (countdown === 0) {
         clearInterval(timerInterval);
-        console.log("Timer is complete!");
+        // console.log("Timer is complete!");
         // Perform any actions you need when the timer is complete
 
         playingSwitch = false;
