@@ -192,14 +192,13 @@ window.addEventListener('load', (event) => {
             titleMapGyroValue = Math.floor(mapValueTitle(mappedGyroValue));
             console.log(titleMapGyroValue);
 
-            title.innerHTML = musuem[titleMapGyroValue].title;
-            titleSect.appendChild(title);
+            titleName.innerHTML = museum[titleMapGyroValue].title;
+            titleSect.appendChild(titleName);
         };
         
         if(mappedGyroValue == alphaRandom && playingSwitch == true){
 
             timerInterval = setInterval(winAfter5, 1000);
-        
         };
       
     });

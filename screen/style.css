@@ -38,6 +38,7 @@ div {
 
 #title {
     background-color: antiquewhite;
+    color: black;
     width: 20%;
     height: auto;
     aspect-ratio: 3/1;
