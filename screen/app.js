@@ -206,7 +206,7 @@ window.addEventListener('load', (event) => {
 
             timerInterval = setInterval(winAfter5, 1000);
         } else {
-            counter = 20;
+            countdown = 20;
         };
       
     });
