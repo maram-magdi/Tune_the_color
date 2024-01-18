@@ -196,7 +196,12 @@ window.addEventListener('load', (event) => {
             titleSect.appendChild(titleName);
         };
         
-        if(mappedGyroValue == alphaRandom && playingSwitch == true){
+        // if(mappedGyroValue == alphaRandom && playingSwitch == true){
+
+        //     timerInterval = setInterval(winAfter5, 1000);
+        // };
+
+        if(titleMapGyroValue == museumRandom && playingSwitch == true){
 
             timerInterval = setInterval(winAfter5, 1000);
         };

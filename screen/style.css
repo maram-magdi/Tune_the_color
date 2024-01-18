@@ -57,5 +57,9 @@ div {
 } */
 
 p {
+    color: rgb(35, 35, 35);
+}
+
+#museum p {
     color: white;
 }
