@@ -40,12 +40,15 @@ let colorsArray = ["ff0800", "orange", "dcb625", "green", "e1c38f", "blue", "hot
 let alphaRandom;
 let museumRandom;
 
+let d = new Date();
+
 let signalStrength = 0;
 
 let clientsConnected = 0;
 
 let artwork = document.getElementById('art');
 let museumSect = document.getElementById('museum');
+let pixelImg = document.createElement('img');
 
 let mappedGyroValue = 0.5;
 
@@ -119,7 +122,6 @@ window.addEventListener('load', (event) => {
 
             museumRandom = Math.floor(Math.random() * museum.length);
             // console.log("museum random is " + museumRandom);
-            let pixelImg = document.createElement('img');
             pixelImg.src = museum[museumRandom].artwork;
             console.log(pixelImg.src);
             artwork.appendChild(pixelImg);
@@ -157,7 +159,7 @@ window.addEventListener('load', (event) => {
             console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
             let colorRandom = chroma('red').alpha(mappedGyroValue).css();
             // console.log(colorRandom);
-            artwork.style.backgroundColor = colorRandom;
+            pixelImg.style.backgroundColor = colorRandom;
 
             degreeDiff = Math.abs(alphaRandom - mappedGyroValue);
             // console.log(degreeDiff);
@@ -170,27 +172,29 @@ window.addEventListener('load', (event) => {
             adjustVolume(mapVolume(degreeDiff));
         };
         
-      if(mappedGyroValue == alphaRandom && playingSwitch == true){
+        if(mappedGyroValue == alphaRandom && playingSwitch == true){
+
+            let seconds = d.getSeconds();
+
+            if(seconds >= 5){
+                playingSwitch = false;
+            
+                console.log("Winner!");
+                let statement = document.createElement('p');
+                statement.innerHTML = "Yay! You won!";
+                museumSect.appendChild(statement);
+                pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+                jsConfetti.addConfetti({
+                    confettiColors: [
+                    '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+                    ],
+                });
+
+            };
         
-        playingSwitch = false;
-        
-        console.log("Winner!");
-        let statement = document.createElement('p');
-        statement.innerHTML = "Yay! You won!";
-        museumSect.appendChild(statement);
-        artwork.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
-        jsConfetti.addConfetti({
-            confettiColors: [
-              '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-            ],
-        });
-        
-      };
+        };
       
     });
-  
-    
-
     
 })
 
