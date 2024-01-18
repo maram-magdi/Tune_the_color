@@ -40,7 +40,7 @@ let colorsArray = ["ff0800", "orange", "dcb625", "green", "e1c38f", "blue", "hot
 let alphaRandom;
 let museumRandom;
 
-let d = new Date();
+let countdown = 5;
 
 let signalStrength = 0;
 
@@ -174,27 +174,38 @@ window.addEventListener('load', (event) => {
         
         if(mappedGyroValue == alphaRandom && playingSwitch == true){
 
-            let seconds = d.getSeconds();
-
-            if(seconds >= 5){
-                playingSwitch = false;
-            
-                console.log("Winner!");
-                let statement = document.createElement('p');
-                statement.innerHTML = "Yay! You won!";
-                museumSect.appendChild(statement);
-                pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
-                jsConfetti.addConfetti({
-                    confettiColors: [
-                    '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-                    ],
-                });
-
-            };
+            setInterval(winAfter5, 1000);
         
         };
       
     });
     
 })
+
+
+function winAfter5 () {
+    console.log(`Countdown: ${countdown} seconds`);
+            
+    if (countdown === 0) {
+        clearInterval(timerInterval);
+        console.log("Timer is complete!");
+        // Perform any actions you need when the timer is complete
+
+        playingSwitch = false;
+            
+        console.log("Winner!");
+        let statement = document.createElement('p');
+        statement.innerHTML = "Yay! You won!";
+        museumSect.appendChild(statement);
+        pixelImg.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+        jsConfetti.addConfetti({
+            confettiColors: [
+            '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+            ],
+        });
+
+    }
+            
+    countdown--;
+}
 
