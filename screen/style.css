@@ -18,11 +18,12 @@ h1 {
     width: 100%;
     height: 90%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
     padding: 5px;
+    position: relative;
 }
 
 /* #color3 {
@@ -34,6 +35,17 @@ div {
     width: 33%;
     aspect-ratio: 1 / 1;
 }
+
+#museum {
+    /* position: absolute; */
+    /* aspect-ratio: 1 / 1; */
+    /* top: 10%; */
+    /* left: 30%; */
+    text-align: center;
+}
+
+/* img {
+} */
 
 p {
     color: white;

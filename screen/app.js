@@ -2,17 +2,50 @@
 
 // import JSConfetti from 'js-confetti';
 
+let museum = [
+    {
+        artwork: "media/banksy.png",
+        color: "ff0800"
+    },
+    {
+        artwork: "media/girlpearl.png",
+        color: "dcb625"
+    },
+    {
+        artwork: "media/greatwave.png",
+        color: "e1c38f"
+    },
+    {
+        artwork: "media/piet.png",
+        color: "ff0800"
+    },
+    {
+        artwork: "media/screamingman.png",
+        color: "3a5197"
+    },
+    {
+        artwork: "media/starrynight.png",
+        color: "345bde"
+    },
+    {
+        artwork: "media/sunflowers.png",
+        color: "8bedd6"
+    }
+];
+
 const jsConfetti = new JSConfetti();
 
-let colorsArray = ["red", "orange", "yellow", "green", "blue"];
+let colorsArray = ["ff0800", "orange", "dcb625", "green", "e1c38f", "blue", "hotpink", "3a5197", "white", "345bde", "beige", "8bedd6"];
 // let alphaRandoms = [];
 let alphaRandom;
+let museumRandom;
 
 let signalStrength = 0;
 
 let clientsConnected = 0;
 
 let artwork = document.getElementById('art');
+let museumSect = document.getElementById('museum');
 
 let mappedGyroValue = 0.5;
 
@@ -53,7 +86,7 @@ clickAudio.addEventListener('click', () => {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
     // Load your audio file
-    audioElement = new Audio('/media/audio.mp3');
+    audioElement = new Audio('/media/audio2.mp3');
     audioSource = audioContext.createMediaElementSource(audioElement);
 
     // Create gain node for volume control
@@ -77,12 +110,19 @@ window.addEventListener('load', (event) => {
 
         if(clientsConnected == 1) {
             artwork.innerHTML = '';
+            // museumSect.innerHTML = '';
             // alphaRandoms = [];
-            artwork.appendChild(colorDiv1);
-            colorDiv1.setAttribute('id', 'color1');
+            // artwork.appendChild(colorDiv1);
+            // colorDiv1.setAttribute('id', 'color1');
             alphaRandom = Math.round(Math.random() * 10) / 10;
             console.log(alphaRandom);
 
+            museumRandom = Math.floor(Math.random() * museum.length);
+            // console.log("museum random is " + museumRandom);
+            let pixelImg = document.createElement('img');
+            pixelImg.src = museum[museumRandom].artwork;
+            console.log(pixelImg.src);
+            artwork.appendChild(pixelImg);
 
 
             // for(let i = 0; i < clientsConnected; i++){
@@ -117,7 +157,7 @@ window.addEventListener('load', (event) => {
             console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
             let colorRandom = chroma('red').alpha(mappedGyroValue).css();
             // console.log(colorRandom);
-            colorDiv1.style.backgroundColor = colorRandom;
+            artwork.style.backgroundColor = colorRandom;
 
             degreeDiff = Math.abs(alphaRandom - mappedGyroValue);
             // console.log(degreeDiff);
@@ -137,8 +177,8 @@ window.addEventListener('load', (event) => {
         console.log("Winner!");
         let statement = document.createElement('p');
         statement.innerHTML = "Yay! You won!";
-        artwork.appendChild(statement);
-        colorDiv1.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
+        museumSect.appendChild(statement);
+        artwork.style.backgroundColor = chroma('red').alpha(alphaRandom).css();
         jsConfetti.addConfetti({
             confettiColors: [
               '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
