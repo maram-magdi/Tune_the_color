@@ -111,7 +111,7 @@ clickAudio.addEventListener('click', () => {
 
     // Load your audio file
     // audioElement = new Audio('/media/audio2.mp3');
-//     audioElement2 = new Audio('/media/correctAudio.mp3');
+    audioElement2 = new Audio('/media/correctAudio.mp3');
 //     audioSource = audioContext.createMediaElementSource(audioElement);
 
 //     // Create gain node for volume control
@@ -184,45 +184,52 @@ window.addEventListener('load', (event) => {
     socket.on('GyroValueToScreen', (data) => {
       
         if(playingSwitch){
-            // console.log("in screen app.js, gyrovaluetoscreen", data);
+          // console.log("in screen app.js, gyrovaluetoscreen", data);
 
-            // let correctTitle = mapValueToRange(museumRandom);
-            // console.log("correct title number is " + correctTitle);
+          // let correctTitle = mapValueToRange(museumRandom);
+          // console.log("correct title number is " + correctTitle);
 
-            mappedGyroValue = Math.round(data * 10)/10;    
-            // console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
-            let colorRandom = chroma('red').alpha(mappedGyroValue).css();
-            // console.log(colorRandom);
-            pixelImg.style.backgroundColor = colorRandom;
+          mappedGyroValue = Math.round(data * 10)/10;    
+          // console.log("in screen app.js, gyrovaluetoscreen", mappedGyroValue);
+          let colorRandom = chroma('red').alpha(mappedGyroValue).css();
+          // console.log(colorRandom);
+          pixelImg.style.backgroundColor = colorRandom;
 
-            degreeDiff = Math.abs(alphaRandom - mappedGyroValue);
-            // console.log(degreeDiff);
+          degreeDiff = Math.abs(alphaRandom - mappedGyroValue);
+          // console.log(degreeDiff);
 
-            // Start the audio playback
-            //audioElement.play();
+          // Start the audio playback
+          //audioElement.play();
 
-            // Call the adjustVolume function with your mapped values
-            // const mappedVolumeValue = 0.5; // Replace with your desired mapped value
-            //adjustVolume(mapVolume(degreeDiff));
+          // Call the adjustVolume function with your mapped values
+          // const mappedVolumeValue = 0.5; // Replace with your desired mapped value
+          //adjustVolume(mapVolume(degreeDiff));
 
 
-            //FIGURING OUT THE TITLE 
-            titleMapGyroValue = Math.floor(mapValueTitle(mappedGyroValue));
-            console.log("titleMapGyroValue", titleMapGyroValue);
+          //FIGURING OUT THE TITLE 
+          titleMapGyroValue = Math.floor(mapValueTitle(mappedGyroValue));
+          console.log("titleMapGyroValue", titleMapGyroValue);
 
-            titleName.innerHTML = museum[titleMapGyroValue].title;
-            titleSect.appendChild(titleName);
+          titleName.innerHTML = museum[titleMapGyroValue].title;
+          titleSect.appendChild(titleName);
+
+          if (titleMapGyroValue === museumRandom) {
+            if (!timerInterval) {
+                startTimer();
+            }
+          } else {
+            if (timerInterval) {
+                stopTimer();
+            }
+          };
+
         };
         
         // if(mappedGyroValue == alphaRandom && playingSwitch == true){
 
         //     timerInterval = setInterval(winAfter5, 1000);
         // };
-        if(titleMapGyroValue == museumRandom){
-          startTimer()
-        } else {
-          stopTimer()
-        };
+        
       
     });
     
@@ -241,7 +248,8 @@ function startTimer() {
 
   
 function stopTimer() {
-  clearInterval(timerInterval)
+  clearInterval(timerInterval);
+  timerInterval = null; // Reset the timerInterval variable
 }
 
 
@@ -258,7 +266,7 @@ function winAfter5 () {
       ],
     });
     //audioElement.pause();
-    //audioElement2.play();
+    audioElement2.play();
   }
 };
 
