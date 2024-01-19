@@ -28,11 +28,11 @@ function mapValueToRange(value, min = -90, max = 90) {
 function getAccel() {
     DeviceMotionEvent.requestPermission().then(response => {
 
-        log.textContent += response + "\n";
+        // log.textContent += response + "\n";
 
         if(response == 'granted') {
             // console.log("Accelerometer permission granted!");
-            log.textContent += "Accelerometer permission granted! \n";
+            // log.textContent += "Accelerometer permission granted! \n";
             //do stuff here - not sure what yet
 
             //add a listener to get phone's acceleration 
@@ -58,7 +58,7 @@ function getAccel() {
                     let leftToRightDegrees = Math.round(event.gamma);
                     mapValue = mapValueToRange(leftToRightDegrees);
                     
-                    log.textContent += mapValue + "\n";
+                    // log.textContent += mapValue + "\n";
                     console.log("in phones/app.js, about to emit gyro mapped val", mapValue);
                     socket.emit('mappedGyroValue', mapValue);
 
