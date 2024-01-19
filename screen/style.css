@@ -7,6 +7,9 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: rgb(35, 35, 35);
+    /* margin: 20px; */
+    background-image: url("/media/screen.jpg");
+    background-size: cover;
 }
 
 h1 {
@@ -43,6 +46,8 @@ div {
     height: auto;
     aspect-ratio: 3/1;
     margin-left: 13%;
+    box-shadow: 5px 5px 5px black;
+    padding: 5px;
 }
 
 #museum {
